@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\HomeForRent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class HomeForRentSeeder extends Seeder
 {
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            HomeForRentSeeder::class
-        ]);
+        HomeForRent::factory(60)->create();
     }
 }
