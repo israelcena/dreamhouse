@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('bath');
             $table->integer('parking');
             $table->string('cep');
-            $table->string('state');
             $table->fullText('description');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
