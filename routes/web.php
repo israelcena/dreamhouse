@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(HomeController::class)->group(function (){
     Route::get('/','index')->name('index');
     Route::get('/sobrenos', 'aboutUs')->name('pages.aboutus');
+    Route::get('/contato', 'contact')->name('pages.contact');
 });
 
 Route::get('/dashboard', function () {
