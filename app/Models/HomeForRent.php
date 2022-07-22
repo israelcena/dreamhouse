@@ -25,7 +25,7 @@ class HomeForRent extends Model
     ];
 
     protected $with = [
-        'user'
+        'users'
     ];
 
     public function users()
