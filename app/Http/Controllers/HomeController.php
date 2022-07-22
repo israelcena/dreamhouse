@@ -30,4 +30,14 @@ class HomeController extends Controller
     {
         return view('pages.contact');
     }
+
+    public function team(): View
+    {
+        return view('pages.team');
+    }
+
+    public function careers(): View
+    {
+        return view('pages.careers');
+    }
 }

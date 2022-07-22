@@ -96,16 +96,16 @@
                     <nav class="list-none mb-10">
                         <ul>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Sobre Nós</a>
+                                <a href="{{ route('pages.aboutus') }}" class="text-gray-600 hover:text-gray-800">Sobre Nós</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Nossa Equipe</a>
+                                <a href="{{ route('pages.team') }}" class="text-gray-600 hover:text-gray-800">Nossa Equipe</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Carreiras</a>
+                                <a href="{{ route('pages.careers') }}" class="text-gray-600 hover:text-gray-800">Carreiras</a>
                             </li>
                             <li>
-                                <a class="text-gray-600 hover:text-gray-800">Contato</a>
+                                <a href="{{ route('pages.contact') }}" class="text-gray-600 hover:text-gray-800">Contato</a>
                             </li>
                         </ul>
                     </nav>
