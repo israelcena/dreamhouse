@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::controller(HomeController::class)->group(function (){
+    Route::get('/','index')->name('index');
+    Route::get('/sobrenos', 'aboutUs')->name('pages.aboutus');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -15,7 +15,7 @@
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
                 <a class="mr-5 hover:text-gray-900">Casas</a>
-                <a class="mr-5 hover:text-gray-900">Quem Somos</a>
+                <a href="{{ route('pages.aboutus') }}" class="mr-5 hover:text-gray-900">Quem Somos</a>
                 <a class="hover:text-gray-900">Contato</a>
             </nav>
             <a href="{{ route('index') }}"

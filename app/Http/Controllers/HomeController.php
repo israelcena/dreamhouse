@@ -20,4 +20,9 @@ class HomeController extends Controller
         $homes = $this->homeForRent::all()->random(4);
         return view('home', compact('homes'));
     }
+
+    public function aboutUs(): View
+    {
+        return view('pages.aboutUs');
+    }
 }
