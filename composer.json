@@ -49,8 +49,7 @@
         ],
         "post-install-cmd": [
             "php artisan clear-compiled",
-            "chmod -R 777 public/",
-            "php artisan db:seed"
+            "chmod -R 777 public/"
         ]
     },
     "extra": {
