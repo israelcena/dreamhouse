@@ -69,6 +69,7 @@
                 <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Uma seleção com as melhores casas! Aproveite e veja mais!</p>
             </div>
             <div class="flex flex-wrap -m-4">
+                @if($homes)
                 @foreach($homes as $home)
                 <div class="xl:w-1/4 md:w-1/2 p-4">
                     <div class="bg-gray-100 p-6 rounded-lg">
@@ -79,6 +80,7 @@
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </section>
