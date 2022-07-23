@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $homes = $this->homeForRent::all()->random(4);
-        return view('home', compact('homes'));
+        return view('pages.home', compact('homes'));
     }
 
     public function aboutUs(): View

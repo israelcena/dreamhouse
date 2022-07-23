@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 @section('body')
     <section class="text-gray-600 body-font">
-        <div class="mx-full flex flex-col mb-12 px-5 pt-24 justify-center items-center bg-contain bg-[url('https://www.homes.com/images/home/hero-desktop.jpg')]" >
+        <div class="mx-full flex flex-col mb-12 px-1 pt-24 justify-center items-center bg-cover bg-no-repeat bg-center  bg-[url('https://www.homes.com/images/home/hero-desktop.jpg')]" >
 {{--            class="bg-[url('https://dummyimage.com/720x600')]"--}}
 {{--            style="background-image: url('https://www.homes.com/images/home/hero-desktop.jpg')";--}}
 {{--            <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">--}}
-            <div class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center bg-white p-6 rounded-lg">
+            <div class="w-full md:w-2/3 flex flex-col mb-20 items-center text-center bg-white p-6 rounded-lg">
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Vamos Encontrar Sua Casa dos Sonhos</h1>
                 <p class="mb-4 leading-relaxed">As melhores casas, os melhores corretores com a melhor plataforma.</p>
                 <div class="flex w-full justify-center items-end">
