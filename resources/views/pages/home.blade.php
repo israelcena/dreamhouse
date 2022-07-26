@@ -1,20 +1,19 @@
 @extends('layouts.layout')
 @section('body')
     <section class="text-gray-600 body-font">
-        <div class="mx-full flex flex-col mb-12 px-1 pt-24 justify-center items-center bg-cover bg-no-repeat bg-center  bg-[url('https://www.homes.com/images/home/hero-desktop.jpg')]" >
-{{--            class="bg-[url('https://dummyimage.com/720x600')]"--}}
-{{--            style="background-image: url('https://www.homes.com/images/home/hero-desktop.jpg')";--}}
-{{--            <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">--}}
+        <div class="mx-full flex flex-col mb-12 px-1 pt-24 justify-center items-center bg-cover bg-no-repeat bg-center  bg-[url('https://www.homes.com/images/home/hero-desktop.jpg')]" >\
             <div class="w-full md:w-2/3 flex flex-col mb-20 items-center text-center bg-white p-6 rounded-lg">
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Vamos Encontrar Sua Casa dos Sonhos</h1>
                 <p class="mb-4 leading-relaxed">As melhores casas, os melhores corretores com a melhor plataforma.</p>
+                <form action="{{ route('homesForRent.index') }}" method="GET">
                 <div class="flex w-full justify-center items-end">
                     <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
-                        <label for="hero-field" class="leading-7 text-sm text-gray-600">Cidade ou endereço:</label>
-                        <input type="text" id="hero-field" name="hero-field" class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" control-id="ControlID-82" placeholder="Ex: Rio de janeiro, Rua Almirante Barroso">
+                        <label for="search" class="leading-7 text-sm text-gray-600">Cidade ou endereço:</label>
+                        <input type="search" id="search" name="search" class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" control-id="ControlID-82" placeholder="Ex: Rio de janeiro, Rua Almirante Barroso"/>
                     </div>
                     <button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">Buscar</button>
                 </div>
+                </form>
                 <p class="text-sm mt-8 text-gray-500 mb-2 w-full">Baixe o nosso App</p>
                 <div class="flex">
                     <button class="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
