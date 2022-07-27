@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('home_for_rents', function (Blueprint $table) {
             $table->id();
+            $table->longText('description')->nullable();
             $table->string('photo')->nullable();
             $table->string('address')->nullable();
-            $table->string('condition');
-            $table->integer('value');
+            $table->string('condition')->nullable();
+            $table->string('type');
+            $table->float('value');
             $table->integer('area');
             $table->integer('bed');
             $table->integer('bath');
-            $table->integer('parking');
+            $table->integer('parking')->nullable();
             $table->string('cep');
-            $table->longText('description')->nullable();
+            $table->boolean('active')->default(false);
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });

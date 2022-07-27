@@ -17,17 +17,22 @@ class HomeForRentFactory extends Factory
      */
     public function definition()
     {
+        $condition = ['Pronto para morar', 'Novo', 'Na Planta'];
+        $types = ['Casa', 'Terreno', 'Apartamento'];
+
         return [
+            'description' => $this->faker->text(100),
             'photo' => $this->faker->imageUrl(),
             'address' => $this->faker->address(),
-            'condition' => $this->faker->word(),
-            'value' => $this->faker->numberBetween(100000, 900000),
+            'condition' => $condition[array_rand($condition)],
+            'type' => $this->faker->randomElement($types),
+            'value' => $this->faker->randomFloat(2, 10000, 1000000),
             'area' => $this->faker->numberBetween(10,1000),
             'bed' => $this->faker->numberBetween(1,6),
             'bath' => $this->faker->numberBetween(1, 5),
             'parking' => $this->faker->numberBetween(0, 3),
             'cep' => $this->faker->postcode(),
-            'description' => $this->faker->text(200),
+            'active' => true,
             'user_id' => User::all()->random()->id
         ];
     }
