@@ -5,7 +5,7 @@
             <div class="w-full md:w-2/3 flex flex-col mb-20 items-center text-center bg-white p-6 rounded-lg">
                 <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Vamos Encontrar Sua Casa dos Sonhos</h1>
                 <p class="mb-4 leading-relaxed">As melhores casas, os melhores corretores com a melhor plataforma.</p>
-                <form action="{{ route('homesForRent.index') }}" method="GET">
+                <form class="w-full" action="{{ route('homesForRent.index') }}" method="GET">
                 <div class="flex w-full justify-center items-end">
                     <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
                         <label for="search" class="leading-7 text-sm text-gray-600">Cidade ou endereço:</label>
