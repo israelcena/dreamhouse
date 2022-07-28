@@ -33,20 +33,16 @@
                     <a href="/login">
                         Login
                     </a>
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
+{{--                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">--}}
+{{--                        <path d="M5 12h14M12 5l7 7-7 7"></path>--}}
+{{--                    </svg>--}}
                 </button>
                 <button
-                    class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+                    class="inline-flex items-center bg-yellow-500 text-white border-0 py-1 px-3 focus:outline-none hover:bg-yellow-600 rounded text-base mt-4 md:mt-0">
                     <a href="/register">
                         Cadastre-se
                     </a>
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                         stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
                 </button>
             </div>
         </div>
