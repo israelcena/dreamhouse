@@ -34,4 +34,10 @@ class HomeForRentController extends Controller
         }
         return view('pages.homeForRent.search', compact('homes', 'search'));
     }
+
+    public function show($id): View
+    {
+        $home = $this->homeForRent->findOrFail($id);
+        return view('pages.homeForRent.show', compact('home'));
+    }
 }
