@@ -21,7 +21,7 @@ class HomeForRentFactory extends Factory
         $types = ['Casa', 'Terreno', 'Apartamento'];
 
         return [
-            'description' => $this->faker->text(100),
+            'description' => $this->faker->text(300),
             'photo' => $this->faker->imageUrl(),
             'address' => $this->faker->address(),
             'condition' => $condition[array_rand($condition)],
