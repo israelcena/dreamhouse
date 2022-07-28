@@ -48,7 +48,8 @@
                 </h1>
                 <p class="mb-8 leading-relaxed">DreamHouse está construindo um mercado colaborativo de última geração para conectar compradores, vendedores e agentes e equipá-los com as ferramentas certas em cada etapa do processo. Com mais de um milhão de listagens e recursos inovadores, vamos ajudá-lo a tomar a decisão mais informada, seja comprando sua casa dos sonhos ou vendendo um imóvel. Estamos redefinindo o processo de compra de casas.</p>
                 <div class="flex justify-center">
-                    <button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">Explorar</button>
+                    <button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">
+                        <a href="{{ route('homesForRent.index') }}">Explorar</a></button>
                     <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Cadastre-se</button>
                 </div>
             </div>
@@ -71,14 +72,19 @@
                 @if($homes)
                 @foreach($homes as $home)
                 <div class="xl:w-1/4 md:w-1/2 p-4">
-                    <div class="bg-gray-100 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg h-100">
                         <img class="h-40 rounded w-full object-cover object-center mb-6" src="{{ $home->photo }}" alt="content">
                         <h3 class="tracking-widest text-yellow-500 text-xs font-medium title-font">{{ $home->condition }}</h3>
                         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">R$ {{ $home->value }},00</h2>
-                        <p class="leading-relaxed text-base">{{ $home->description }}</p>
+                        <p class="leading-relaxed text-base">{{ "$home->type com $home->bed Quartos, $home->bath Banheiros e com $home->area m² de area total." }} </p>
                     </div>
                 </div>
                 @endforeach
+                    <div class="flex justify-center w-full mt-4">
+                        <button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded-lg text-lg">
+                            <a href="{{ route('homesForRent.index') }}">Explorar Todas</a>
+                        </button>
+                    </div>
                 @endif
             </div>
         </div>
