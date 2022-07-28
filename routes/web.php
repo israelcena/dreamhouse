@@ -15,6 +15,7 @@ Route::controller(HomePagesController::class)->group(function () {
 Route::controller(HomeForRentController::class)->group(function () {
     Route::get('/homes', 'index')->name("homesForRent.index");
     Route::get('/homes/search', 'search')->name("homesForRent.search");
+    Route::get('/homes/{id}', 'show')->name("homesForRent.show");
 });
 
 Route::get('/dashboard', function () {
