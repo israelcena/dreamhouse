@@ -51,7 +51,9 @@
 
                 <x-input id="cpf" class="block mt-1 w-full"
                          type="text"
-                         name="cpf" required />
+                         name="cpf"
+                         :value="old('cpf')"
+                         required />
             </div>
 
             <!-- Phone Number -->
@@ -60,7 +62,9 @@
 
                 <x-input id="phone" class="block mt-1 w-full"
                          type="text"
-                         name="phone" required />
+                         name="phone"
+                         :value="old('phone')"
+                         required />
             </div>
 
             <!-- Address -->
@@ -69,7 +73,9 @@
 
                 <x-input id="address" class="block mt-1 w-full"
                          type="text"
-                         name="address" required />
+                         name="address"
+                         :value="old('address')"
+                         required />
             </div>
 
 
