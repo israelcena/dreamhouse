@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeForRentController;
 use App\Http\Controllers\HomePagesController;
 use Illuminate\Support\Facades\Route;
@@ -18,8 +19,8 @@ Route::controller(HomeForRentController::class)->group(function () {
     Route::get('/homes/{id}', 'show')->name("homesForRent.show");
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 require __DIR__ . '/auth.php';
