@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-gray-800 leading-tight">
-            {{ __('Cadastrar Nova Casa') }}
+            {{ __('Editar Nova Casa') }}
         </h2>
     </x-slot>
     @if ($errors->any())
@@ -16,9 +16,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('dashboard.store') }}" method="POST">
+                    <form action="{{ route('dashboard.update', $homeForRent->id) }}" method="POST">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
                         <div class="grid grid-cols-1 gap-2">
                             <div class="form-group mb-6">
                                 <input type="text"
@@ -38,7 +38,7 @@
                                     m-0
                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                     id="photo" name="photo" aria-describedby="home photo" placeholder="Foto (URL)"
-                                    value="{{ old('photo') }}" />
+                                    value="{{ $homeForRent->photo }}">
                             </div>
                             <div class="form-group mb-6">
                                 <input type="text"
@@ -56,7 +56,7 @@
                                     transition
                                     focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                     id="address" aria-describedby="address" name="address"
-                                    placeholder="Endereço Completo" value="{{ old('address') }}" />
+                                    placeholder="Endereço Completo" value="{{ $homeForRent->address }}">
                                 <input type="text"
                                     class="form-control
                                     w-1/5
@@ -72,7 +72,7 @@
                                     transition
                                     focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                     id="cep" aria-describedby="cep" name="cep" placeholder="cep"
-                                    value="{{ old('cep') }}" />
+                                    value="{{ $homeForRent->cep }}">
                             </div>
                             <div class="form-group mb-6 flex gap-2 justify-start items-center">
                                 <label class="form-control" for="condition">Condição do imóvel: </label>
@@ -81,8 +81,7 @@
                                         bg-white bg-clip-padding
                                           border border-solid border-gray-300
                                         rounded"
-                                    name="condition" id="condition" value="{{ old('condition') }}">
-                                    >
+                                    name="condition" id="condition">
                                     <option value="Novo">Novo</option>
                                     <option value="Pronto para morar">Pronto para morar</option>
                                     <option value="Na Planta">Na Planta</option>
@@ -94,7 +93,7 @@
                                         bg-white bg-clip-padding
                                             border border-solid border-gray-300
                                         rounded"
-                                    name="type" id="type">
+                                    name="type" id="type" value="{{ $homeForRent->type }}">
                                     <option value="Casa">Casa</option>
                                     <option value="Terreno">Terreno</option>
                                     <option value="Apartamento">Apartamento</option>
@@ -116,7 +115,7 @@
                                                 transition
                                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none m-0"
                                         id="value" placeholder="Valor do imóvel" name="value"
-                                        value="{{ old('value') }}" />
+                                        value="{{ $homeForRent->value }}">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +137,7 @@
                                                 transition
                                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                     m-0 id="area" placeholder="em metros quadrados" name="area"
-                                    value="{{ old('area') }}" />
+                                    value="{{ $homeForRent->area }}">
                             </div>
 
                         </div>
@@ -160,7 +159,7 @@
                                                 transition
                                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                 m-0 id="bed" placeholder="em metros quadrados" name="bed"
-                                value="{{ old('bed') }}" />
+                                value="{{ $homeForRent->bed }}">
 
                             <label class="form-control" for="bed">Banheiros: </label>
                             <input type="number"
@@ -178,7 +177,7 @@
                                                 transition
                                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                 m-0 id="bath" placeholder="em metros quadrados" name="bath"
-                                value="{{ old('bath') }}" />
+                                value="{{ $homeForRent->bath }}">
 
                             <label class="form-control" for="bed">Vagas de Estácionamento: </label>
                             <input type="number"
@@ -196,13 +195,13 @@
                                                 transition
                                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
                                 m-0 id="parking" placeholder="em metros quadrados" name="parking"
-                                value="{{ old('parking') }}" />
+                                value="{{ $homeForRent->parking }}">
                         </div>
 
                         <div class="form-group form-check text-center mb-6">
                             <input type="checkbox"
                                 class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-                                id="check" required>
+                                id="check" checked>
                             <label class="form-check-label inline-block text-gray-800" for="check">Afirmo que
                                 todos os
                                 dados acima estão corretos</label>
@@ -225,7 +224,7 @@
                             focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0
                             duration-150
                             transition
-                            ease-in-out">Cadastrar</button>
+                            ease-in-out">Editar</button>
                     </form>
                 </div>
             </div>

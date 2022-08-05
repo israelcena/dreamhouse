@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/incluir', [DashboardController::class, 'create'])->name('dashboard.create');
     Route::post('/dashboard/incluir', [DashboardController::class, 'store'])->name('dashboard.store');
+    Route::get('/dashboard/{id}/editar', [DashboardController::class, 'edit'])->name('dashboard.edit');
+    Route::put('/dashboard/{id}', [DashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/excluir/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
 });
 
