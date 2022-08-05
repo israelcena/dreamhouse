@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/incluir', [DashboardController::class, 'create'])->name('dashboard.create');
     Route::post('/dashboard/incluir', [DashboardController::class, 'store'])->name('dashboard.store');
+    Route::delete('/dashboard/excluir/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,9 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semi-bold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{-- {{ __('Dashboard') }} --}}
             @if (session()->has('create'))
                 <div>{{ session()->get('create') }}</div>
+            @endif
+
+            @if (session()->has('delete'))
+                <div>{{ session()->get('delete') }}</div>
             @endif
         </h2>
     </x-slot>
@@ -49,8 +53,10 @@
                                         class="text-white bg-yellow-500 border-0 py-1 px-4 focus:outline-none hover:bg-yellow-500 rounded hover:bg-yellow-400 focus:outline-none">
                                         Editar
                                     </button>
-                                    <form action="">
-                                        <button
+                                    <form action="{{ route('dashboard.destroy', $home->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
                                             class="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-500 rounded hover:bg-red-400 focus:outline-none">
                                             Excluir
                                         </button>
