@@ -21,6 +21,11 @@ class DashboardController extends Controller
         $InUser = $auth::user();
         $InUser->load('homeForRent');
         $homesOfUser = $InUser->homeForRent;
-        return view('dashboard', compact('InUser', 'homesOfUser'));
+        return view('dashboard.index', compact('InUser', 'homesOfUser'));
+    }
+
+    public function create(): View
+    {
+        return view('dashboard.create');
     }
 }
