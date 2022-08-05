@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeForRent;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -27,5 +28,13 @@ class DashboardController extends Controller
     public function create(): View
     {
         return view('dashboard.create');
+    }
+
+    public function store(Request $request)
+    {
+        $homeForRent = $request->all();
+        $homeForRent['user_id'] = Auth::user()->id;
+        $this->homeForRent->create($homeForRent);
+        return redirect()->route('dashboard.index')->with('create', 'Casa cadastrada com sucesso!');
     }
 }
