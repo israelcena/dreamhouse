@@ -4,12 +4,21 @@
             {{ __('Cadastrar Nova Casa') }}
         </h2>
     </x-slot>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger fade show" role="alert">
+                Erro: <strong>{{ $error }}</strong>
+            </div>
+        @endforeach
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form>
+                    <form action="{{ route('dashboard.store') }}" method="POST">
+                        @csrf
+                        @method('POST')
                         <div class="grid grid-cols-1 gap-2">
                             <div class="form-group mb-6">
                                 <input type="text"
@@ -28,7 +37,8 @@
                                     transition
                                     m-0
                                 focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
-                                    id="photo" name="photo" aria-describedby="home photo" placeholder="Foto (URL)">
+                                    id="photo" name="photo" aria-describedby="home photo"
+                                    placeholder="Foto (URL)">
                             </div>
                             <div class="form-group mb-6">
                                 <input type="text"
@@ -83,9 +93,9 @@
                                             border border-solid border-gray-300
                                         rounded"
                                     name="type" id="type">
-                                    <option value="Novo">Casa</option>
-                                    <option value="Pronto para morar">Terreno</option>
-                                    <option value="Na Planta">Apartamento</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Terreno">Terreno</option>
+                                    <option value="Apartamento">Apartamento</option>
                                 </select>
                                 <div class="form-group flex items-center gap-2">
                                     <label for="value">Valor: </label>
