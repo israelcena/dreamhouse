@@ -29,9 +29,9 @@
                     </svg>
                     <span class="ml-3 text-xl">DreamHouse</span>
                 </a>
-                <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 lg:ml-0">
+                <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 lg:ml-0 gap-2">
                     @if (Auth::check())
-                        {{ Auth::user()->name }}
+                        <a href="{{ route('dashboard.index') }}">{{ Auth::user()->name }}</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
