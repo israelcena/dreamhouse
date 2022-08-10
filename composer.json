@@ -52,10 +52,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
-            "php artisan clear-compiled",
-            "chmod -R 777 public/",
-            "npm install",
-            "npm run dev"
+            "php artisan clear-compiled"
         ]
     },
     "extra": {
