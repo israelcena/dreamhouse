@@ -104,8 +104,7 @@
                                     <img class="h-40 rounded w-full object-cover object-center mb-6"
                                          src="{{ $home->photo }}" alt="content">
                                     <h3 class="tracking-widest text-yellow-500 text-xs font-medium title-font">{{ $home->condition }}</h3>
-                                    <h2 class="text-lg text-gray-900 font-medium title-font mb-4">R$ {{ $home->value }}
-                                        ,00</h2>
+                                    <h2 class="text-lg text-gray-900 font-medium title-font mb-4"> {{ formatMoney($home->value) }}</h2>
                                     <p class="leading-relaxed text-base">{{ "$home->type com $home->bed Quartos, $home->bath Banheiros e com $home->area m² de area total." }} </p>
                                 </div>
                             </a>
