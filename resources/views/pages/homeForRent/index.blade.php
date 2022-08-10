@@ -75,7 +75,7 @@
                                     <div class="w-full sm:p-4 px-4 mb-6">
                                         <div class="leading-relaxed">{{ $home->address }}</div>
                                         <h1 class="title-font font-medium text-xl mb-2 text-gray-900">{{ "$home->type com $home->bed Quartos, com $home->area m²" }} </h1>
-                                        <h2>R$ {{ $home->value }}</h2>
+                                        <h2>{{ formatMoney($home->value) }}</h2>
                                     </div>
                                     <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
                                         <h2 class="title-font font-medium text-3xl text-gray-900">{{ $home->area }}

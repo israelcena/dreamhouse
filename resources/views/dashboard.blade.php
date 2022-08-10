@@ -32,8 +32,8 @@
                         <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src={{ $home->photo }} >
                         <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
                             <h2 class="tracking-widest text-sm title-font font-medium text-yellow-500 mb-1">{{ $home->type }} {{ $home->condition }}</h2>
-                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">R$ {{ $home->value }}</h1>
-                            <p class="leading-relaxed">{{ $home->type }} {{ $home->condition }} com {{ $home->bed }} quartos, {{ $home->bath }} banheiros, {{ $home->parking }} vagas de garagem e com {{ $home->area }} metros quadrados de espaço.</p>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ formatMoney($home->value) }}</h1>
+                            <p class="leading-relaxed">{{ $home->type }} {{ $home->condition }} com {{ $home->bed }} quartos, {{ $home->bath }} banheiros, {{ $home->parking }} vagas de garagem e com {{ $home->area }} m² de espaço.</p>
                             <div class="mt-4 flex gap-4">
                             <button
                             class="text-white bg-yellow-500 border-0 py-1 px-4 focus:outline-none hover:bg-yellow-500 rounded hover:bg-yellow-400 focus:outline-none">

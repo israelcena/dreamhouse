@@ -80,7 +80,7 @@
 
                     </div>
                     <div class="flex">
-                        <span class="title-font font-medium text-2xl text-gray-900">R$ {{ $home->value }}</span>
+                        <span class="title-font font-medium text-2xl text-gray-900">{{ formatMoney($home->value) }}</span>
                         <button
                             class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
                             Solicitar Contato
