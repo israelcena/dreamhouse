@@ -26,6 +26,7 @@
                 <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Casas Cadastradas</h1>
             </div>
             <div class="flex flex-wrap -m-4">
+
                 @foreach ($homesOfUser as $home)
                 <div class="lg:w-1/3 sm:w-1/2 p-4">
                     <div class="flex relative">
