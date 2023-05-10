@@ -11,6 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <p>{{ $InUser->name }}, Você está logado!</p>
                 <br/>
+                {{-- comentário genérico --}}
                     <p>Suas Informações: </p>
                     <p>Cpf: {{ $InUser->cpf }}</p>
                     <p>Telefone: {{ $InUser->phone }}</p>
@@ -46,7 +47,7 @@
                             </button>
                             </form>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
