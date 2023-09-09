@@ -50,7 +50,8 @@
                                         ({{ $home->condition }})
                                     </a>
                                 </h2>
-                                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ formatMoney($home->value) }}
+                                <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+                                    {{ formatMoney($home->value) }}
                                 </h1>
                                 <p class="leading-relaxed">{{ $home->type }} {{ $home->condition }} com
                                     {{ $home->bed }} quartos, {{ $home->bath }} banheiros, {{ $home->parking }}

@@ -31,7 +31,8 @@
                 </a>
                 <div class="lg:w-2/5 inline-flex items-center lg:justify-end ml-5 lg:ml-0 gap-2">
                     @if (Auth::check())
-                        <a class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="{{ route('dashboard.index') }}">Olá! {{ Auth::user()->name }}</a>
+                        <a class="text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                            href="{{ route('dashboard.index') }}">Olá! {{ Auth::user()->name }}</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -77,7 +78,7 @@
                         <span class="ml-3 text-xl">DreamHouse</span>
                     </a>
                     <p class="mt-2 text-sm text-gray-500">Conectamos Pessoas!
-                      Arquitetos, Compradores e Vendedores</p>
+                        Arquitetos, Compradores e Vendedores</p>
                 </div>
                 <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                     <div class="lg:w-1/3 md:w-1/2 w-full px-4">
@@ -97,8 +98,8 @@
                                     <a class="text-gray-600 hover:text-gray-800">Casas na planta</a>
                                 </li>
                                 <li>
-                                  <a class="text-gray-600 hover:text-gray-800">Casas Virtuais</a>
-                              </li>
+                                    <a class="text-gray-600 hover:text-gray-800">Casas Virtuais</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
