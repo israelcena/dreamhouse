@@ -76,7 +76,8 @@
                         </svg>
                         <span class="ml-3 text-xl">DreamHouse</span>
                     </a>
-                    <p class="mt-2 text-sm text-gray-500">Junto com você realizando o seu sonho da casa própria</p>
+                    <p class="mt-2 text-sm text-gray-500">Conectamos Pessoas!
+                      Arquitetos, Compradores e Vendedores</p>
                 </div>
                 <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                     <div class="lg:w-1/3 md:w-1/2 w-full px-4">
@@ -95,6 +96,9 @@
                                 <li>
                                     <a class="text-gray-600 hover:text-gray-800">Casas na planta</a>
                                 </li>
+                                <li>
+                                  <a class="text-gray-600 hover:text-gray-800">Casas Virtuais</a>
+                              </li>
                             </ul>
                         </nav>
                     </div>
@@ -110,10 +114,10 @@
                                     <a href="{{ route('pages.team') }}" class="text-gray-600 hover:text-gray-800">Nossa
                                         Equipe</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="{{ route('pages.careers') }}"
                                         class="text-gray-600 hover:text-gray-800">Carreiras</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{ route('pages.contact') }}"
                                         class="text-gray-600 hover:text-gray-800">Contato</a>
@@ -125,12 +129,12 @@
                         <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Imprensa</h2>
                         <nav class="list-none mb-10">
                             <ul>
-                                <li>
+                                {{-- <li>
                                     <a class="text-gray-600 hover:text-gray-800">Investidores</a>
-                                </li>
-                                <li>
+                                </li> --}}
+                                {{-- <li>
                                     <a class="text-gray-600 hover:text-gray-800">Parceiros</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a class="text-gray-600 hover:text-gray-800">Termos e condições</a>
                                 </li>
