@@ -98,4 +98,19 @@ class HomeForRent extends Model
         return $this->ratings()->count();
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function contactRequests()
+    {
+        return $this->hasMany(ContactRequest::class);
+    }
+
+    public function totalFavorites()
+    {
+        return $this->favorites()->count();
+    }
+
 }

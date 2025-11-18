@@ -26,14 +26,24 @@
                             @endfor
                             <span class="text-gray-600 ml-3">{{ number_format($avgRating, 1) }} ({{ $totalRatings }} {{ $totalRatings == 1 ? 'Avaliação' : 'Avaliações' }})</span>
                         </span>
-                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
-                            <a class="text-gray-500">
+                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
+                            @php
+                                $shareUrl = url()->current();
+                                $shareText = urlencode("Confira esta incrível casa: {$home->type} com {$home->bed} quartos!");
+                            @endphp
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-blue-600"
+                               title="Compartilhar no Facebook">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                                 </svg>
                             </a>
-                            <a class="text-gray-500">
+                            <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $shareText }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-blue-400"
+                               title="Compartilhar no Twitter">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path
@@ -41,7 +51,10 @@
                                     </path>
                                 </svg>
                             </a>
-                            <a class="text-gray-500">
+                            <a href="https://wa.me/?text={{ $shareText }}%20{{ $shareUrl }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-green-600"
+                               title="Compartilhar no WhatsApp">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path
@@ -61,21 +74,34 @@
                         <p class="leading-relaxed">Vagas: {{ $home->parking }}</p>
 
                     </div>
-                    <div class="flex">
+                    <div class="flex items-center">
                         <span class="title-font font-medium text-2xl text-gray-900">{{ formatMoney($home->value) }}</span>
-                        <button
-                            class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
-                            Solicitar Contato
-                        </button>
-                        <button
-                            class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:text-red-500 ease-in">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                class="w-5 h-5" viewBox="0 0 24 24">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
-                                </path>
-                            </svg>
-                        </button>
+                        @auth
+                            @if($home->user_id !== auth()->id())
+                                <button onclick="openContactModal()"
+                                    class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                                    Solicitar Contato
+                                </button>
+                                <button
+                                    onclick="toggleFavorite({{ $home->id }})"
+                                    id="favorite-btn"
+                                    class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center ml-4 transition-colors {{ auth()->user()->hasFavorited($home->id) ? 'text-red-500' : 'text-gray-500 hover:text-red-500' }}">
+                                    <svg fill="{{ auth()->user()->hasFavorited($home->id) ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        class="w-5 h-5" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            @else
+                                <span class="ml-auto text-gray-500 text-sm">Esta é a sua casa</span>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}"
+                                class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                                Fazer Login para Solicitar Contato
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -196,4 +222,121 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal de Solicitação de Contato -->
+    <div id="contactModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center pb-3">
+                <h3 class="text-xl font-bold">Solicitar Contato</h3>
+                <button onclick="closeContactModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            @auth
+                <form action="{{ route('contact-requests.store', $home->id) }}" method="POST" class="mt-4">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input type="text" name="name" value="{{ old('name', auth()->user()->name) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Telefone</label>
+                        <input type="text" name="phone" value="{{ old('phone', auth()->user()->phone) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Mensagem</label>
+                        <textarea name="message" rows="4" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="Descreva seu interesse nesta casa...">{{ old('message') }}</textarea>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit"
+                            class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Enviar Solicitação
+                        </button>
+                        <button type="button" onclick="closeContactModal()"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            @endauth
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+        }
+
+        // Fecha o modal ao clicar fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                closeContactModal();
+            }
+        }
+
+        @auth
+        function toggleFavorite(homeId) {
+            fetch(`/homes/${homeId}/favorite/toggle`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const btn = document.getElementById('favorite-btn');
+                    const svg = btn.querySelector('svg');
+
+                    if (data.favorited) {
+                        btn.classList.remove('text-gray-500', 'hover:text-red-500');
+                        btn.classList.add('text-red-500');
+                        svg.setAttribute('fill', 'currentColor');
+                    } else {
+                        btn.classList.remove('text-red-500');
+                        btn.classList.add('text-gray-500', 'hover:text-red-500');
+                        svg.setAttribute('fill', 'none');
+                    }
+
+                    // Exibe mensagem temporária
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50';
+                    message.textContent = data.message;
+                    document.body.appendChild(message);
+
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Erro ao processar favorito. Tente novamente.');
+            });
+        }
+        @endauth
+    </script>
 @endsection

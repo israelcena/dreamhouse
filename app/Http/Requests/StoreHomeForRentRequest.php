@@ -25,7 +25,8 @@ class StoreHomeForRentRequest extends FormRequest
     {
         return [
             'description' => 'nullable|string|max:5000',
-            'photo' => 'nullable|url|max:500',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
+            'photo_url' => 'nullable|url|max:500',
             'address' => 'required|string|max:255',
             'condition' => 'nullable|string|max:100',
             'type' => 'required|in:Casa,Apartamento',
@@ -48,8 +49,11 @@ class StoreHomeForRentRequest extends FormRequest
     {
         return [
             'description.max' => 'A descrição não pode ter mais de 5000 caracteres.',
-            'photo.url' => 'A foto deve ser uma URL válida.',
-            'photo.max' => 'A URL da foto não pode ter mais de 500 caracteres.',
+            'photo.image' => 'O arquivo deve ser uma imagem.',
+            'photo.mimes' => 'A imagem deve ser do tipo: jpeg, png, jpg, gif ou webp.',
+            'photo.max' => 'A imagem não pode ter mais de 5MB.',
+            'photo_url.url' => 'A URL da foto deve ser válida.',
+            'photo_url.max' => 'A URL da foto não pode ter mais de 500 caracteres.',
             'address.required' => 'O endereço é obrigatório.',
             'address.max' => 'O endereço não pode ter mais de 255 caracteres.',
             'type.required' => 'O tipo do imóvel é obrigatório.',
