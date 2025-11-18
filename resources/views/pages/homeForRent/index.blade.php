@@ -3,55 +3,67 @@
     <section class="text-gray-600 body-font">
         <div class="mx-auto container pt-16 flex gap-4 justify-center">
             <div class="w-3/12 bg-yellow-100/50 rounded-lg p-4 text-gray-500">
-                <form class="space-y-6" method="GET" action="">
-                    @csrf
+                <form class="space-y-6" method="GET" action="{{ route('homesForRent.index') }}">
                     <div>
                         <label class="capitalize" for="localization">Localização do imóvel</label>
                         <input type="text" id="localization" name="localization"
-                            value="{{ $search ? $search : old('search') }}"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            value="{{ $filters['localization'] ?? '' }}"
+                            class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            placeholder="Digite a localização" />
                     </div>
                     <div class="flex flex-col">
                         <label for="type">Tipo de imóvel</label>
                         <select name="type" id="type"
                             class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            <option value="Casa">Casa</option>
-                            <option value="Apartamento">Apartamento</option>
+                            <option value="">Todos</option>
+                            <option value="Casa" {{ ($filters['type'] ?? '') == 'Casa' ? 'selected' : '' }}>Casa</option>
+                            <option value="Apartamento" {{ ($filters['type'] ?? '') == 'Apartamento' ? 'selected' : '' }}>Apartamento</option>
                         </select>
                     </div>
 
                     <div class="flex gap-2">
                         <div class="w-1/2 flex flex-col">
                             <label for="min-value">Preço Mínimo</label>
-                            <input type="text" name="min-value" id="min-value" placeholder="ex: 10000"
+                            <input type="number" name="min-value" id="min-value" placeholder="10000"
+                                value="{{ $filters['min-value'] ?? '' }}"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                         <div class="w-1/2 flex flex-col">
                             <label for="max-value">Preço Máximo</label>
-                            <input type="text" name="max-value" id="max-value" placeholder="ex: 10000000"
+                            <input type="number" name="max-value" id="max-value" placeholder="10000000"
+                                value="{{ $filters['max-value'] ?? '' }}"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                     </div>
                     <div>
-                        <label for="beds">Número de quartos</label>
-                        <input type="number" name="beds" id="beds" placeholder="0"
+                        <label for="beds">Número mínimo de quartos</label>
+                        <input type="number" name="beds" id="beds" placeholder="0" min="0"
+                            value="{{ $filters['beds'] ?? '' }}"
                             class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                     <div class="">
-                        <label for="baths">Número de banheiros</label>
-                        <input type="number" name="baths" id="baths" placeholder="0"
+                        <label for="baths">Número mínimo de banheiros</label>
+                        <input type="number" name="baths" id="baths" placeholder="0" min="0"
+                            value="{{ $filters['baths'] ?? '' }}"
                             class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
                     <div class="">
-                        <label for="parking">Número de Vagas</label>
-                        <input type="number" name="parking" id="parking" placeholder="0"
+                        <label for="parking">Número mínimo de Vagas</label>
+                        <input type="number" name="parking" id="parking" placeholder="0" min="0"
+                            value="{{ $filters['parking'] ?? '' }}"
                             class="w-full bg-gray-100 bg-opacity-50 rounded focus:ring-2 focus:ring-yellow-200 focus:bg-transparent border border-gray-300 focus:border-yellow-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                     </div>
 
-                    <button
-                        class="mt-6 inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-gray-400 rounded">
-                        Buscar
-                    </button>
+                    <div class="flex gap-2">
+                        <button type="submit"
+                            class="flex-1 inline-flex justify-center text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                            Buscar
+                        </button>
+                        <a href="{{ route('homesForRent.index') }}"
+                            class="inline-flex justify-center items-center text-gray-700 bg-gray-200 border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded">
+                            Limpar
+                        </a>
+                    </div>
                 </form>
             </div>
 
@@ -65,7 +77,7 @@
                     </div>
                 @endif
                 <div class="flex flex-col">
-                    @foreach ($homes as $home)
+                    @forelse ($homes as $home)
                         <a href="{{ route('homesForRent.show', $home->id) }}">
                             <div class="flex gap-4 mb-4 cursor-pointer border-0 hover:bg-gray-50">
                                 <div class="w-2/5 rounded-lg overflow-hidden">
@@ -115,7 +127,20 @@
                                 </div>
                             </div>
                         </a>
-                    @endforeach
+                    @empty
+                        <div class="p-8 text-center">
+                            <div class="mb-4">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma casa encontrada</h3>
+                            <p class="text-gray-500 mb-4">Não encontramos casas com os filtros selecionados. Tente ajustar sua busca.</p>
+                            <a href="{{ route('homesForRent.index') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg">
+                                Ver todas as casas
+                            </a>
+                        </div>
+                    @endforelse
                 </div>
                 <div class="text-gray-200">
                     {{ $homes->links() }}
