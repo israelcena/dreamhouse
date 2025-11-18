@@ -16,29 +16,63 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('dashboard.store') }}" method="POST">
+                    <form action="{{ route('dashboard.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="grid grid-cols-1 gap-2">
                             <div class="form-group mb-6">
-                                <input type="text"
-                                    class="form-control
-                                    w-full
-                                    block
-                                    py-1.5
-                                    px-3
-                                    font-normal
-                                    text-base
-                                    bg-white bg-clip-padding
-                                    text-gray-700
-                                    rounded
-                                    border border-solid border-gray-300
-                                    ease-in-out
-                                    transition
-                                    m-0
-                                focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
-                                    id="photo" name="photo" aria-describedby="home photo" placeholder="Foto (URL)"
-                                    value="{{ old('photo') }}" />
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Foto do Imóvel</label>
+                                <p class="text-xs text-gray-500 mb-2">Escolha uma das opções abaixo:</p>
+
+                                <div class="mb-3">
+                                    <label for="photo" class="block text-sm text-gray-600 mb-1">Fazer upload de arquivo:</label>
+                                    <input type="file"
+                                        class="form-control
+                                        w-full
+                                        block
+                                        py-1.5
+                                        px-3
+                                        font-normal
+                                        text-base
+                                        bg-white bg-clip-padding
+                                        text-gray-700
+                                        rounded
+                                        border border-solid border-gray-300
+                                        ease-in-out
+                                        transition
+                                        m-0
+                                        focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
+                                        id="photo" name="photo" accept="image/jpeg,image/png,image/jpg,image/gif,image/webp" />
+                                    <p class="text-xs text-gray-500 mt-1">Formatos aceitos: JPEG, PNG, JPG, GIF, WEBP (máx. 5MB)</p>
+                                </div>
+
+                                <div class="flex items-center my-3">
+                                    <div class="flex-1 border-t border-gray-300"></div>
+                                    <span class="px-3 text-gray-500 text-sm">OU</span>
+                                    <div class="flex-1 border-t border-gray-300"></div>
+                                </div>
+
+                                <div>
+                                    <label for="photo_url" class="block text-sm text-gray-600 mb-1">Informar URL da imagem:</label>
+                                    <input type="text"
+                                        class="form-control
+                                        w-full
+                                        block
+                                        py-1.5
+                                        px-3
+                                        font-normal
+                                        text-base
+                                        bg-white bg-clip-padding
+                                        text-gray-700
+                                        rounded
+                                        border border-solid border-gray-300
+                                        ease-in-out
+                                        transition
+                                        m-0
+                                        focus:text-gray-700 focus:bg-white focus:border-yellow-600 focus:outline-none"
+                                        id="photo_url" name="photo_url" placeholder="https://exemplo.com/imagem.jpg"
+                                        value="{{ old('photo_url') }}" />
+                                </div>
                             </div>
                             <div class="form-group mb-6">
                                 <input type="text"

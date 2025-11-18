@@ -18,6 +18,15 @@
                     <x-nav-link :href="route('dashboard.create')" :active="request()->routeIs('dashboard.create')">
                         {{ __('Cadastrar Nova Casa') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
+                        {{ __('Favoritos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact-requests.index')" :active="request()->routeIs('contact-requests.*')">
+                        {{ __('Solicitações') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('homesForRent.index')" :active="request()->routeIs('homesForRent.*')">
+                        {{ __('Explorar Casas') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -79,6 +88,15 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.create')" :active="request()->routeIs('dashboard.create')">
                 {{ __('Cadastrar nova casa') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.index')">
+                {{ __('Favoritos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact-requests.index')" :active="request()->routeIs('contact-requests.*')">
+                {{ __('Solicitações') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('homesForRent.index')" :active="request()->routeIs('homesForRent.*')">
+                {{ __('Explorar Casas') }}
             </x-responsive-nav-link>
         </div>
 

@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             HomeForRentSeeder::class,
-            RatingSeeder::class
+            RatingSeeder::class,
+            FavoriteSeeder::class,
+            ContactRequestSeeder::class
         ]);
     }
 }
