@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(HomeForRent::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

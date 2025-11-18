@@ -77,7 +77,23 @@
                                         <div class="leading-relaxed">{{ $home->address }}</div>
                                         <h1 class="title-font font-medium text-xl mb-2 text-gray-900">
                                             {{ "$home->type com $home->bed Quartos, com $home->area m²" }} </h1>
-                                        <h2>{{ formatMoney($home->value) }}</h2>
+                                        <h2 class="mb-2">{{ formatMoney($home->value) }}</h2>
+                                        @php
+                                            $avgRating = $home->averageRating() ?? 0;
+                                            $totalRatings = $home->totalRatings();
+                                        @endphp
+                                        @if($totalRatings > 0)
+                                            <div class="flex items-center">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <svg class="w-4 h-4 {{ $i <= round($avgRating) ? 'text-yellow-500' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                                    </svg>
+                                                @endfor
+                                                <span class="ml-2 text-sm text-gray-600">{{ number_format($avgRating, 1) }} ({{ $totalRatings }})</span>
+                                            </div>
+                                        @else
+                                            <div class="text-sm text-gray-500">Sem avaliações ainda</div>
+                                        @endif
                                     </div>
                                     <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
                                         <h2 class="title-font font-medium text-3xl text-gray-900">{{ $home->area }}

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeForRentController;
 use App\Http\Controllers\HomePagesController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomePagesController::class)->group(function () {
@@ -26,6 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/{id}/editar', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/{id}', [DashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/excluir/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+
+    // Rating routes
+    Route::post('/homes/{home}/ratings', [RatingController::class, 'store'])->name('ratings.store');
+    Route::put('/ratings/{rating}', [RatingController::class, 'update'])->name('ratings.update');
+    Route::delete('/ratings/{rating}', [RatingController::class, 'destroy'])->name('ratings.destroy');
 });
 
 require __DIR__ . '/auth.php';
