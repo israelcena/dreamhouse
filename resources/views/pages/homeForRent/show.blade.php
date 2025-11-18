@@ -12,46 +12,38 @@
                     </h1>
                     <div class="flex mb-4">
                         <span class="flex items-center">
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <span class="text-gray-600 ml-3">4 Reviews</span>
+                            @php
+                                $avgRating = $home->averageRating() ?? 0;
+                                $totalRatings = $home->totalRatings();
+                            @endphp
+                            @for ($i = 1; $i <= 5; $i++)
+                                <svg fill="{{ $i <= round($avgRating) ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                                    </path>
+                                </svg>
+                            @endfor
+                            <span class="text-gray-600 ml-3">{{ number_format($avgRating, 1) }} ({{ $totalRatings }} {{ $totalRatings == 1 ? 'Avaliação' : 'Avaliações' }})</span>
                         </span>
-                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
-                            <a class="text-gray-500">
+                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2">
+                            @php
+                                $shareUrl = url()->current();
+                                $shareText = urlencode("Confira esta incrível casa: {$home->type} com {$home->bed} quartos!");
+                            @endphp
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-blue-600"
+                               title="Compartilhar no Facebook">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                                 </svg>
                             </a>
-                            <a class="text-gray-500">
+                            <a href="https://twitter.com/intent/tweet?url={{ $shareUrl }}&text={{ $shareText }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-blue-400"
+                               title="Compartilhar no Twitter">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path
@@ -59,7 +51,10 @@
                                     </path>
                                 </svg>
                             </a>
-                            <a class="text-gray-500">
+                            <a href="https://wa.me/?text={{ $shareText }}%20{{ $shareUrl }}"
+                               target="_blank"
+                               class="text-gray-500 hover:text-green-600"
+                               title="Compartilhar no WhatsApp">
                                 <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     class="w-5 h-5" viewBox="0 0 24 24">
                                     <path
@@ -79,24 +74,269 @@
                         <p class="leading-relaxed">Vagas: {{ $home->parking }}</p>
 
                     </div>
-                    <div class="flex">
+                    <div class="flex items-center">
                         <span class="title-font font-medium text-2xl text-gray-900">{{ formatMoney($home->value) }}</span>
-                        <button
-                            class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
-                            Solicitar Contato
-                        </button>
-                        <button
-                            class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:text-red-500 ease-in">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                class="w-5 h-5" viewBox="0 0 24 24">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
-                                </path>
-                            </svg>
-                        </button>
+                        @auth
+                            @if($home->user_id !== auth()->id())
+                                <button onclick="openContactModal()"
+                                    class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                                    Solicitar Contato
+                                </button>
+                                <button
+                                    onclick="toggleFavorite({{ $home->id }})"
+                                    id="favorite-btn"
+                                    class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center ml-4 transition-colors {{ auth()->user()->hasFavorited($home->id) ? 'text-red-500' : 'text-gray-500 hover:text-red-500' }}">
+                                    <svg fill="{{ auth()->user()->hasFavorited($home->id) ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        class="w-5 h-5" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            @else
+                                <span class="ml-auto text-gray-500 text-sm">Esta é a sua casa</span>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}"
+                                class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
+                                Fazer Login para Solicitar Contato
+                            </a>
+                        @endauth
                     </div>
+                </div>
+            </div>
+
+            <!-- Seção de Avaliações -->
+            <div class="lg:w-4/5 mx-auto mt-12">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Avaliações</h2>
+
+                @if(session('success'))
+                    <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @auth
+                    @php
+                        $userRating = $home->ratings()->where('user_id', auth()->id())->first();
+                        $isOwner = $home->user_id === auth()->id();
+                    @endphp
+
+                    @if(!$userRating && !$isOwner)
+                        <!-- Formulário para adicionar avaliação -->
+                        <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h3 class="text-lg font-semibold mb-4">Deixe sua avaliação</h3>
+                            <form action="{{ route('ratings.store', $home->id) }}" method="POST">
+                                @csrf
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                                        Nota (1-5 estrelas)
+                                    </label>
+                                    <div class="flex gap-2">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="rating" value="{{ $i }}" class="hidden peer" required>
+                                                <svg class="w-8 h-8 text-gray-300 peer-checked:text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                                </svg>
+                                            </label>
+                                        @endfor
+                                    </div>
+                                    @error('rating')
+                                        <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                                        Comentário (opcional)
+                                    </label>
+                                    <textarea name="comment" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Conte-nos sobre sua experiência...">{{ old('comment') }}</textarea>
+                                    @error('comment')
+                                        <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Enviar Avaliação
+                                </button>
+                            </form>
+                        </div>
+                    @elseif($isOwner)
+                        <div class="mb-8 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded">
+                            Você não pode avaliar sua própria casa.
+                        </div>
+                    @endif
+                @else
+                    <div class="mb-8 p-4 bg-gray-100 border border-gray-300 text-gray-700 rounded">
+                        <a href="{{ route('login') }}" class="text-yellow-600 hover:text-yellow-700 font-semibold">Faça login</a> para deixar sua avaliação.
+                    </div>
+                @endauth
+
+                <!-- Lista de Avaliações -->
+                <div class="space-y-6">
+                    @forelse($home->ratings()->latest()->get() as $rating)
+                        <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">{{ $rating->user->name }}</h4>
+                                    <div class="flex items-center mt-1">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <svg class="w-4 h-4 {{ $i <= $rating->rating ? 'text-yellow-500' : 'text-gray-300' }}" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                            </svg>
+                                        @endfor
+                                        <span class="ml-2 text-sm text-gray-600">{{ $rating->created_at->diffForHumans() }}</span>
+                                    </div>
+                                </div>
+
+                                @auth
+                                    @if($rating->user_id === auth()->id())
+                                        <form action="{{ route('ratings.destroy', $rating->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta avaliação?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800 text-sm">
+                                                Excluir
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
+
+                            @if($rating->comment)
+                                <p class="text-gray-700 mt-3">{{ $rating->comment }}</p>
+                            @endif
+                        </div>
+                    @empty
+                        <div class="p-6 bg-gray-50 rounded-lg text-center text-gray-600">
+                            Nenhuma avaliação ainda. Seja o primeiro a avaliar esta casa!
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal de Solicitação de Contato -->
+    <div id="contactModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center pb-3">
+                <h3 class="text-xl font-bold">Solicitar Contato</h3>
+                <button onclick="closeContactModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            @auth
+                <form action="{{ route('contact-requests.store', $home->id) }}" method="POST" class="mt-4">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input type="text" name="name" value="{{ old('name', auth()->user()->name) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Telefone</label>
+                        <input type="text" name="phone" value="{{ old('phone', auth()->user()->phone) }}" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Mensagem</label>
+                        <textarea name="message" rows="4" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            placeholder="Descreva seu interesse nesta casa...">{{ old('message') }}</textarea>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit"
+                            class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Enviar Solicitação
+                        </button>
+                        <button type="button" onclick="closeContactModal()"
+                            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            @endauth
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+        }
+
+        // Fecha o modal ao clicar fora dele
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                closeContactModal();
+            }
+        }
+
+        @auth
+        function toggleFavorite(homeId) {
+            fetch(`/homes/${homeId}/favorite/toggle`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const btn = document.getElementById('favorite-btn');
+                    const svg = btn.querySelector('svg');
+
+                    if (data.favorited) {
+                        btn.classList.remove('text-gray-500', 'hover:text-red-500');
+                        btn.classList.add('text-red-500');
+                        svg.setAttribute('fill', 'currentColor');
+                    } else {
+                        btn.classList.remove('text-red-500');
+                        btn.classList.add('text-gray-500', 'hover:text-red-500');
+                        svg.setAttribute('fill', 'none');
+                    }
+
+                    // Exibe mensagem temporária
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50';
+                    message.textContent = data.message;
+                    document.body.appendChild(message);
+
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Erro ao processar favorito. Tente novamente.');
+            });
+        }
+        @endauth
+    </script>
 @endsection

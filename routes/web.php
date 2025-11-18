@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeForRentController;
 use App\Http\Controllers\HomePagesController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomePagesController::class)->group(function () {
@@ -26,6 +29,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/{id}/editar', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/{id}', [DashboardController::class, 'update'])->name('dashboard.update');
     Route::delete('/dashboard/excluir/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+
+    // Rating routes
+    Route::post('/homes/{home}/ratings', [RatingController::class, 'store'])->name('ratings.store');
+    Route::put('/ratings/{rating}', [RatingController::class, 'update'])->name('ratings.update');
+    Route::delete('/ratings/{rating}', [RatingController::class, 'destroy'])->name('ratings.destroy');
+
+    // Favorite routes
+    Route::get('/favoritos', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::post('/homes/{home}/favorite/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+    Route::delete('/favoritos/{favorite}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+
+    // Contact Request routes
+    Route::get('/solicitacoes-contato', [ContactRequestController::class, 'index'])->name('contact-requests.index');
+    Route::get('/minhas-solicitacoes', [ContactRequestController::class, 'myRequests'])->name('contact-requests.my-requests');
+    Route::post('/homes/{home}/contato', [ContactRequestController::class, 'store'])->name('contact-requests.store');
+    Route::patch('/solicitacoes-contato/{contactRequest}/status', [ContactRequestController::class, 'updateStatus'])->name('contact-requests.update-status');
 });
 
 require __DIR__ . '/auth.php';

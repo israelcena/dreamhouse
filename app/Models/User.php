@@ -49,4 +49,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(HomeForRent::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function contactRequests()
+    {
+        return $this->hasMany(ContactRequest::class);
+    }
+
+    public function hasFavorited($homeId)
+    {
+        return $this->favorites()->where('home_for_rent_id', $homeId)->exists();
+    }
 }

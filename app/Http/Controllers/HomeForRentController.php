@@ -20,9 +20,16 @@ class HomeForRentController extends Controller
 
     public function index(): View
     {
-        $homes = $this->homeForRent->paginate(7);
-        $search = $this->req->search;
-        return view('pages.homeForRent.index', compact('homes', 'search'));
+        $filters = $this->req->all();
+
+        // Se houver filtros, usa busca avançada
+        if (!empty($filters) && count($filters) > 0) {
+            $homes = $this->homeForRent->advancedSearch($filters)->paginate(7)->withQueryString();
+        } else {
+            $homes = $this->homeForRent->where('active', true)->paginate(7);
+        }
+
+        return view('pages.homeForRent.index', compact('homes', 'filters'));
     }
 
     public function search(): RedirectResponse|View
